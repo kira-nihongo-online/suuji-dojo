@@ -55,6 +55,23 @@
   <div id="result"></div>
 
   <script>
+
+    let voiceJP = null;
+
+    function loadVoices() {
+      const voices = speechSynthesis.getVoices();
+
+      voiceJP =
+        voices.find(v => v.name.includes("七海")) ||
+        voices.find(v => v.name.includes("Nanami")) ||
+        voices.find(v => v.lang === "ja-JP");
+
+      console.log("選択音声:", voiceJP?.name);
+    }
+
+    speechSynthesis.onvoiceschanged = loadVoices;
+    loadVoices();
+
     function numberToKanji(num) {
       const units = ["", "万", "億"];
       const digits = ["", "一", "二", "三", "四", "五", "六", "七", "八", "九"];
@@ -95,7 +112,17 @@
 
     function speak(text) {
       const utterance = new SpeechSynthesisUtterance(text);
+
       utterance.lang = "ja-JP";
+
+      if (voiceJP) {
+        utterance.voice = voiceJP;
+      }
+
+      utterance.rate = 1.0;
+      utterance.pitch = 1.0;
+
+      speechSynthesis.cancel();
       speechSynthesis.speak(utterance);
     }
 
