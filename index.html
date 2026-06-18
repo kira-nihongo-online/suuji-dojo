@@ -40,10 +40,24 @@
       margin-left: 10px;
       font-family: "Hiragino Mincho ProN", "MS Mincho", "Yu Mincho", serif;
     }
+
+    .title{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .logo{
+      height:50px;
+    }
+
   </style>
 </head>
 <body>
-  <h1>🎲 数字道場</h1>
+  <h1>
+    <img src="logo.png" height="50" alt="logo">
+    数字道場
+  </h1>
 
   <label>最小値: <input type="number" id="min" value="1"></label>
   <label>最大値: <input type="number" id="max" value="100000000"></label>
